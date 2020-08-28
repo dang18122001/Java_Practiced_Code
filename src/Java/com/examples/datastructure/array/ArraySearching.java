@@ -70,5 +70,6 @@ public class ArraySearching {
         // If key is present at middle point, return mid.
         if (a[mid] == key)
             return mid;
+        return 0;
     }
 }
