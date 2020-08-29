@@ -30,7 +30,10 @@ public class ArraySearching {
     /*
     Function to get pivot.
     */
-    public int findPivot(int a[], int low, int high) {
+    public int findPivot(int a[], int low, int high) throws Exception {
+
+        if (high >= a.length || low >= a.length || low < 0 || high < 0)
+            throw new Exception("wrong index input");
         // base cases
         if (high < low)
             return -1;
