@@ -65,7 +65,26 @@ public class ArraySearching {
         return binarySearch(a, low, (mid - 1), key);
     }
 
+    /*
+    1) Find middle point mid = (l + h)/2
+    2) If key is present at middle point, return mid.
+    3) Else If arr[l..mid] is sorted
+        a) If key to be searched lies in range from arr[l]
+        to arr[mid], recur for arr[l..mid].
+        b) Else recur for arr[mid+1..h]
+    4) Else (arr[mid+1..h] must be sorted)
+        a) If key to be searched lies in range from arr[mid+1]
+        to arr[h], recur for arr[mid+1..h].
+        b) Else recur for arr[l..mid]
+    */
     public int searchInSorted_RotatedArrayMethod2(int a[], int l, int h, int key) throws Exception {
+
+        if (h >= a.length || l >= a.length || l < 0 || h < 0)
+            throw new Exception("wrong input index");
+
+        // When key is not in arr[]
+        if (l > h)
+            return -1;
 
         // Find middle point
         int mid = (l + h)/2;
@@ -73,6 +92,25 @@ public class ArraySearching {
         // If key is present at middle point, return mid.
         if (a[mid] == key)
             return mid;
-        return 0;
+
+        // Else If a[l..mid] is sorted
+        else if (a[l] <= a[mid]) {
+            // If key to be searched lies in range from arr[l]
+            //        to arr[mid], recur for arr[l..mid].
+            if (a[l] <= key && key < a[mid])
+                return searchInSorted_RotatedArrayMethod2(a, l, mid - 1, key);
+            // Else recur for arr[mid+1..h]
+            return searchInSorted_RotatedArrayMethod2(a, mid + 1, h, key);
+        }
+
+        // Else (arr[mid+1..h] must be sorted)
+        else {
+            // If key to be searched lies in range from arr[mid+1]
+            //        to arr[h], recur for arr[mid+1..h].
+            if (a[mid + 1] <= key && key <= a[h])
+                return searchInSorted_RotatedArrayMethod2(a, mid + 1, h, key);
+            // Else recur for arr[l..mid]
+            return searchInSorted_RotatedArrayMethod2(a, l, mid - 1, key);
+        }
     }
 }
