@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Assertions;
 
+import java.util.Random;
+
 class ArrayRotationTest {
 
     @org.junit.jupiter.api.Test
@@ -508,6 +510,31 @@ class ArrayRotationTest {
         assertEquals(1, inputArray[0]);
     }
 
+    /*
+    Tests for swap method.
+    */
+    @Test
+    // Test with an inputArray of n random elements.
+    void swapTest1() {
+
+        // Create inputArray with n random elements.
+        int n = 100000000;
+        int[] inputArray = new int[n];
+        Random rand = new Random();
+        for (int i = 0; i < inputArray.length; i++)
+            inputArray[i] = rand.nextInt(1000);
+
+        ArrayRotation a = new ArrayRotation();
+        int d = rand.nextInt((n/2 -1) + 1);
+        int firstElementOfFirstHalf = inputArray[0];
+        int firstElementOfSecondHalf = inputArray[n - 1 -d];
+        a.swap(inputArray, 0, n - 1 - d, d);
+
+        assertEquals(firstElementOfFirstHalf, inputArray[n - 1 - d]);
+        assertEquals(firstElementOfSecondHalf, inputArray[0]);
+    }
+
+
     @org.junit.jupiter.api.Test
         // Test inputArray = null
     void rotateArrayMethod5_Test1() {
@@ -619,6 +646,22 @@ class ArrayRotationTest {
         int[] inputArray = {1};
         a.rotateArrayMethod5(inputArray, 0, 2, 1);
         assertEquals(1, inputArray[0]);
+    }
+
+    @Test
+        // Test d = 1
+    void rotateArrayMethod5_Test11() throws Exception {
+        ArrayRotation a = new ArrayRotation();
+        int[] inputArray = {1, 2, 3, 3, 5, 6, 2, 5};
+        a.rotateArrayMethod5(inputArray, 0, 1, 8);
+        assertEquals(2, inputArray[0]);
+        assertEquals(3, inputArray[1]);
+        assertEquals(3, inputArray[2]);
+        assertEquals(5, inputArray[3]);
+        assertEquals(6, inputArray[4]);
+        assertEquals(2, inputArray[5]);
+        assertEquals(5, inputArray[6]);
+        assertEquals(1, inputArray[7]);
     }
 
     /*

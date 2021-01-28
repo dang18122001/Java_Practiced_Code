@@ -33,9 +33,8 @@ public class ArrayRotation {
         }
 
         // Change the value of other elements.
-        for (int i = 0; i < d; i++) {
+        for (int i = 0; i < d; i++)
             a[n - d + i] = temp[i];
-        }
     }
 
     public void rotateArrayMethod2(int[] a, int d , int n) throws Exception {
